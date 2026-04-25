@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 
 const inputClass =
   "w-full py-2 px-3 border border-border rounded-lg text-sm outline-none bg-white mt-1 focus:border-primary transition block";
@@ -6,22 +6,10 @@ const labelClass = "text-xs font-medium text-muted mb-1 block";
 
 // Props: onSubmit, editData (null atau object MataKuliah), onCancel
 export default function GradeForm({ onSubmit, editData, onCancel }) {
-  const [nama, setNama] = useState("");
-  const [sks, setSks] = useState("3");
-  const [nilai, setNilai] = useState("");
-
-  // useEffect: Mengisi form saat mode EDIT (editData berubah)
-  useEffect(() => {
-    if (editData) {
-      setNama(editData.nama);
-      setSks(String(editData.sks));
-      setNilai(String(editData.nilai));
-    } else {
-      setNama("");
-      setSks("3");
-      setNilai("");
-    }
-  }, [editData]);
+  // Inisialisasi state langsung dari props (tidak perlu useEffect)
+  const [nama, setNama] = useState(editData?.nama ?? "");
+  const [sks, setSks] = useState(editData ? String(editData.sks) : "3");
+  const [nilai, setNilai] = useState(editData ? String(editData.nilai) : "");
 
   function handleSubmit() {
     if (!nama.trim() || !nilai || nilai < 0 || nilai > 4)

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import GradeForm from "./components/GradeForm";
 import GradeTable from "./components/GradeTable";

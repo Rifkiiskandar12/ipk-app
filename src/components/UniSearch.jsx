@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const inputClass =
   "w-full py-2 px-3 border border-border rounded-lg text-[13px] outline-none transition focus:border-primary";
@@ -24,7 +24,7 @@ export default function UniSearch() {
       if (!res.ok) throw new Error("Response gagal: " + res.status);
       const json = await res.json();
       setAll(json.map((u) => ({ name: u.name, web: u.web_pages?.[0] || "" })));
-    } catch (e) {
+    } catch {
       setError("Gagal memuat data. Periksa koneksi internet.");
     } finally {
       setLoading(false);
