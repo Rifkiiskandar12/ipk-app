@@ -1,5 +1,3 @@
-import React from "react";
-
 function gradeStyle(huruf) {
   if (["A", "A-"].includes(huruf)) return "bg-success-light text-success";
   if (["B+", "B", "B-"].includes(huruf)) return "bg-blue-light text-blue";

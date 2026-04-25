@@ -1,5 +1,3 @@
-import React from "react";
-
 // Props yang diterima: ipk (angka IPK), total (jumlah MK)
 export default function Navbar({ ipk, total }) {
   return (
