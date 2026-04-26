@@ -15,10 +15,7 @@ export default function Navbar({ ipk, total }) {
             <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
           </svg>
         </div>
-        <span className="font-semibold text-[15px]">Konversi Nilai</span>
-        <span className="text-[11px] bg-primary-light text-primary px-2 py-0.5 rounded-full font-medium">
-          Akademik
-        </span>
+        <span className="font-semibold text-[15px]">IPK App</span>
       </div>
       {/* Sisi Kanan: Stats */}
       <div className="flex gap-4 text-[13px]">
