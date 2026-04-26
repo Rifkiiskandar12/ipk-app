@@ -7,9 +7,9 @@ function gradeStyle(huruf) {
 
 const tdClass = "py-2.5 px-3 border-b border-border text-[13px]";
 
-// Props: data (Array), onEdit, onDelete
-export default function GradeTable({ data, onEdit, onDelete }) {
-  if (!data.length)
+// Props: daftarMataKuliah (Array), onEdit, onDelete
+export default function GradeTable({ daftarMataKuliah, onEdit, onDelete }) {
+  if (!daftarMataKuliah.length)
     return (
       <div className="bg-white border border-border rounded-xl p-10 text-center text-muted text-sm">
         Belum ada data. Tambahkan mata kuliah di form atas.
@@ -31,42 +31,42 @@ export default function GradeTable({ data, onEdit, onDelete }) {
                 "Mutu",
                 "Bobot",
                 "Aksi",
-              ].map((h) => (
+              ].map((headerText) => (
                 <th
-                  key={h}
+                  key={headerText}
                   className={`${tdClass} font-semibold text-[11px] text-muted uppercase tracking-wider text-left`}
                 >
-                  {h}
+                  {headerText}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {data.map((d, i) => (
-              <tr key={d.id} className="hover:bg-slate-50 transition">
-                <td className={`${tdClass} text-muted`}>{i + 1}</td>
-                <td className={`${tdClass} font-medium`}>{d.nama}</td>
-                <td className={tdClass}>{d.sks}</td>
-                <td className={tdClass}>{d.nilai}</td>
+            {daftarMataKuliah.map((mataKuliah, index) => (
+              <tr key={mataKuliah.id} className="hover:bg-slate-50 transition">
+                <td className={`${tdClass} text-muted`}>{index + 1}</td>
+                <td className={`${tdClass} font-medium`}>{mataKuliah.nama}</td>
+                <td className={tdClass}>{mataKuliah.sks}</td>
+                <td className={tdClass}>{mataKuliah.nilai}</td>
                 <td className={tdClass}>
                   <span
-                    className={`${gradeStyle(d.huruf)} px-2.5 py-1 rounded-full text-xs font-semibold`}
+                    className={`${gradeStyle(mataKuliah.huruf)} px-2.5 py-1 rounded-full text-xs font-semibold`}
                   >
-                    {d.huruf}
+                    {mataKuliah.huruf}
                   </span>
                 </td>
-                <td className={tdClass}>{d.mutu.toFixed(1)}</td>
-                <td className={tdClass}>{d.bobot.toFixed(2)}</td>
+                <td className={tdClass}>{mataKuliah.mutu.toFixed(1)}</td>
+                <td className={tdClass}>{mataKuliah.bobot.toFixed(2)}</td>
                 <td className={tdClass}>
                   <div className="flex gap-1.5">
                     <button
-                      onClick={() => onEdit(d)}
+                      onClick={() => onEdit(mataKuliah)}
                       className="bg-warning-light text-warning py-1 px-2.5 rounded-md text-xs font-medium hover:brightness-95 transition"
                     >
                       Edit
                     </button>
                     <button
-                      onClick={() => onDelete(d.id)}
+                      onClick={() => onDelete(mataKuliah.id)}
                       className="bg-danger-light text-danger py-1 px-2.5 rounded-md text-xs font-medium hover:brightness-95 transition"
                     >
                       Hapus
