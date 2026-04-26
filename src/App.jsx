@@ -7,7 +7,6 @@ import { MataKuliah } from "./models/MataKuliah";
 
 const STORAGE_KEY = "ipk_app_data";
 
-// Memuat data awal dari localStorage
 function loadFromStorage() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);

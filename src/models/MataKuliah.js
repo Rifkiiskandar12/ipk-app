@@ -5,13 +5,12 @@ export class MataKuliah {
     this.id = id;
     this.nama = nama;
     this.sks = parseInt(sks);
-    this.nilai = parseFloat(nilai); // Nilai angka (misal: 3.5)
-    this.huruf = this.toHuruf(); // Otomatis konversi ke huruf
-    this.mutu = this.toMutu(); // Otomatis konversi ke angka mutu
+    this.nilai = parseFloat(nilai);
+    this.huruf = this.toHuruf();
+    this.mutu = this.toMutu();
     this.bobot = parseFloat((this.mutu * this.sks).toFixed(2));
   }
 
-  // METHOD 1: Konversi nilai angka → huruf (A, B+, B, C, dst)
   toHuruf() {
     const n = this.nilai;
     if (n >= 4.0) return "A";
@@ -39,7 +38,6 @@ export class MataKuliah {
     return map[this.huruf] ?? 0;
   }
 
-  // STATIC METHOD: Hitung IPK dari Array semua mata kuliah
   static hitungIPK(list) {
     const totalSKS = list.reduce((sum, d) => sum + d.sks, 0);
     if (!totalSKS) return 0;
