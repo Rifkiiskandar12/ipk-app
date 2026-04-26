@@ -6,7 +6,6 @@ export default {
   ],
   theme: {
     extend: {
-      // Tambahkan warna custom agar bisa dipakai di className
       colors: {
         primary: { DEFAULT: "#3b6be8", light: "#ebf0fd", dark: "#2d55c5" },
         success: { DEFAULT: "#22883a", light: "#e8f8ed" },

@@ -1,8 +1,6 @@
-// Props yang diterima: ipk (angka IPK), total (jumlah MK)
 export default function Navbar({ ipk, total }) {
   return (
     <nav className="bg-white border-b border-border px-6 h-14 flex items-center justify-between sticky top-0 z-10 shadow-sm">
-      {/* Sisi Kiri: Logo & Nama */}
       <div className="flex items-center gap-2.5">
         <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
           <svg

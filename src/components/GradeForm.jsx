@@ -32,7 +32,7 @@ export default function GradeForm({ onSubmit, editData, onCancel }) {
           className={inputClass}
           placeholder="cth: Algoritma & Pemrograman"
           value={nama}
-          onChange={(e) => setNama(e.target.value)}
+          onChange={(event) => setNama(event.target.value)}
         />
       </div>
       {/* Input SKS & Nilai */}
@@ -42,11 +42,11 @@ export default function GradeForm({ onSubmit, editData, onCancel }) {
           <select
             className={inputClass}
             value={sks}
-            onChange={(e) => setSks(e.target.value)}
+            onChange={(event) => setSks(event.target.value)}
           >
-            {[1, 2, 3, 4, 6].map((v) => (
-              <option key={v} value={v}>
-                {v} SKS
+            {[1, 2, 3, 4, 6].map((nilaiSks) => (
+              <option key={nilaiSks} value={nilaiSks}>
+                {nilaiSks} SKS
               </option>
             ))}
           </select>
@@ -61,7 +61,7 @@ export default function GradeForm({ onSubmit, editData, onCancel }) {
             step="0.01"
             placeholder="cth: 3.5"
             value={nilai}
-            onChange={(e) => setNilai(e.target.value)}
+            onChange={(event) => setNilai(event.target.value)}
           />
         </div>
       </div>

@@ -5,7 +5,7 @@ const inputClass =
 
 export default function UniSearch() {
   const [query, setQuery] = useState("");
-  const [all, setAll] = useState([]);
+  const [semuaUniversitas, setSemuaUniversitas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -18,12 +18,12 @@ export default function UniSearch() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(
+      const responseAPI = await fetch(
         "http://universities.hipolabs.com/search?country=Indonesia",
       );
-      if (!res.ok) throw new Error("Response gagal: " + res.status);
-      const json = await res.json();
-      setAll(json.map((u) => ({ name: u.name, web: u.web_pages?.[0] || "" })));
+      if (!responseAPI.ok) throw new Error("Response gagal: " + responseAPI.status);
+      const dataJson = await responseAPI.json();
+      setSemuaUniversitas(dataJson.map((universitas) => ({ name: universitas.name, web: universitas.web_pages?.[0] || "" })));
     } catch {
       setError("Gagal memuat data. Periksa koneksi internet.");
     } finally {
@@ -31,8 +31,8 @@ export default function UniSearch() {
     }
   }
 
-  const filtered = all
-    .filter((u) => u.name.toLowerCase().includes(query.toLowerCase()))
+  const universitasTersaring = semuaUniversitas
+    .filter((universitas) => universitas.name.toLowerCase().includes(query.toLowerCase()))
     .slice(0, 6);
 
   return (
@@ -63,30 +63,30 @@ export default function UniSearch() {
         <>
           <input
             className={`${inputClass} mb-2.5`}
-            placeholder={`Cari dari ${all.length} universitas...`}
+            placeholder={`Cari dari ${semuaUniversitas.length} universitas...`}
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(event) => setQuery(event.target.value)}
           />
           <div className="max-h-[180px] overflow-y-auto pr-1">
-            {filtered.map((u, i) => (
+            {universitasTersaring.map((universitas, index) => (
               <div
-                key={i}
+                key={index}
                 className="py-[7px] border-b border-border text-[13px] last:border-0"
               >
-                <div className="font-medium">{u.name}</div>
-                {u.web && (
+                <div className="font-medium">{universitas.name}</div>
+                {universitas.web && (
                   <a
-                    href={u.web}
+                    href={universitas.web}
                     target="_blank"
                     rel="noreferrer"
                     className="text-[11px] text-primary hover:underline"
                   >
-                    {u.web}
+                    {universitas.web}
                   </a>
                 )}
               </div>
             ))}
-            {!filtered.length && (
+            {!universitasTersaring.length && (
               <div className="text-muted text-[13px] py-2">
                 Tidak ditemukan.
               </div>
