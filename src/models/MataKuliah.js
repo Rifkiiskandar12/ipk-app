@@ -1,8 +1,9 @@
 // OOP JavaScript - Class, Constructor, Method
 export class MataKuliah {
   // CONSTRUCTOR: dijalankan setiap kali `new MataKuliah(...)` dipanggil
-  constructor(id, nama, sks, nilai) {
+  constructor(id, kode, nama, sks, nilai) {
     this.id = id;
+    this.kode = kode;
     this.nama = nama;
     this.sks = parseInt(sks);
     this.nilai = parseFloat(nilai);
@@ -12,14 +13,14 @@ export class MataKuliah {
   }
 
   toHuruf() {
-    const nilaiPecahan = this.nilai;
-    if (nilaiPecahan >= 4.0) return "A";
-    if (nilaiPecahan >= 3.75) return "A-";
-    if (nilaiPecahan >= 3.5) return "B+";
-    if (nilaiPecahan >= 3.0) return "B";
-    if (nilaiPecahan >= 2.5) return "B-";
-    if (nilaiPecahan >= 2.0) return "C";
-    if (nilaiPecahan >= 1.0) return "D";
+    const n = this.nilai;
+    if (n >= 85) return "A";
+    if (n >= 80) return "A-";
+    if (n >= 75) return "B+";
+    if (n >= 70) return "B";
+    if (n >= 65) return "B-";
+    if (n >= 60) return "C";
+    if (n >= 50) return "D";
     return "E";
   }
 
@@ -39,10 +40,19 @@ export class MataKuliah {
   }
 
   static hitungIPK(daftarMataKuliah) {
-    const totalSKS = daftarMataKuliah.reduce((totalSementara, mataKuliah) => totalSementara + mataKuliah.sks, 0);
+    const totalSKS = daftarMataKuliah.reduce(
+      (totalSementara, mataKuliah) => totalSementara + mataKuliah.sks,
+      0,
+    );
     if (!totalSKS) return 0;
     return parseFloat(
-      (daftarMataKuliah.reduce((totalBobotSementara, mataKuliah) => totalBobotSementara + mataKuliah.bobot, 0) / totalSKS).toFixed(2),
+      (
+        daftarMataKuliah.reduce(
+          (totalBobotSementara, mataKuliah) =>
+            totalBobotSementara + mataKuliah.bobot,
+          0,
+        ) / totalSKS
+      ).toFixed(2),
     );
   }
 }

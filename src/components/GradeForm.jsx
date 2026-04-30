@@ -7,14 +7,16 @@ const labelClass = "text-xs font-medium text-muted mb-1 block";
 // Props: onSubmit, editData (null atau object MataKuliah), onCancel
 export default function GradeForm({ onSubmit, editData, onCancel }) {
   // Inisialisasi state langsung dari props (tidak perlu useEffect)
+  const [kode, setKode] = useState(editData?.kode ?? "");
   const [nama, setNama] = useState(editData?.nama ?? "");
   const [sks, setSks] = useState(editData ? String(editData.sks) : "3");
   const [nilai, setNilai] = useState(editData ? String(editData.nilai) : "");
 
   function handleSubmit() {
-    if (!nama.trim() || !nilai || nilai < 0 || nilai > 4)
-      return alert("Lengkapi semua field! (Nilai: 0.00 - 4.00)");
-    onSubmit({ nama: nama.trim(), sks, nilai: parseFloat(nilai) });
+    if (!kode.trim() || !nama.trim() || !nilai || nilai < 0 || nilai > 100)
+      return alert("Lengkapi semua field! (Nilai: 0 - 100)");
+    onSubmit({ kode: kode.trim(), nama: nama.trim(), sks, nilai: parseFloat(nilai) });
+    setKode("");
     setNama("");
     setSks("3");
     setNilai("");
@@ -25,6 +27,16 @@ export default function GradeForm({ onSubmit, editData, onCancel }) {
       <p className="font-semibold mb-3.5 text-sm">
         {editData ? "✏️ Edit Mata Kuliah" : "➕ Tambah Mata Kuliah"}
       </p>
+      {/* Input Kode */}
+      <div className="mb-2.5">
+        <label className={labelClass}>Kode Mata Kuliah</label>
+        <input
+          className={inputClass}
+          placeholder="cth: IF1234"
+          value={kode}
+          onChange={(event) => setKode(event.target.value)}
+        />
+      </div>
       {/* Input Nama */}
       <div className="mb-2.5">
         <label className={labelClass}>Nama Mata Kuliah</label>
@@ -52,14 +64,14 @@ export default function GradeForm({ onSubmit, editData, onCancel }) {
           </select>
         </div>
         <div>
-          <label className={labelClass}>Nilai (0.00 - 4.00)</label>
+          <label className={labelClass}>Nilai (0 - 100)</label>
           <input
             className={inputClass}
             type="number"
             min="0"
-            max="4"
+            max="100"
             step="0.01"
-            placeholder="cth: 3.5"
+            placeholder="cth: 85"
             value={nilai}
             onChange={(event) => setNilai(event.target.value)}
           />
