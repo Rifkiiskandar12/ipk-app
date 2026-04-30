@@ -24,6 +24,7 @@ export default function GradeTable({ daftarMataKuliah, onEdit, onDelete }) {
             <tr className="bg-slate-50">
               {[
                 "No",
+                "Kode",
                 "Mata Kuliah",
                 "SKS",
                 "Nilai",
@@ -45,6 +46,7 @@ export default function GradeTable({ daftarMataKuliah, onEdit, onDelete }) {
             {daftarMataKuliah.map((mataKuliah, index) => (
               <tr key={mataKuliah.id} className="hover:bg-slate-50 transition">
                 <td className={`${tdClass} text-muted`}>{index + 1}</td>
+                <td className={`${tdClass} font-medium`}>{mataKuliah.kode || "-"}</td>
                 <td className={`${tdClass} font-medium`}>{mataKuliah.nama}</td>
                 <td className={tdClass}>{mataKuliah.sks}</td>
                 <td className={tdClass}>{mataKuliah.nilai}</td>

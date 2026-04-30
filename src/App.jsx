@@ -12,7 +12,7 @@ function loadFromStorage() {
     const dataTersimpan = localStorage.getItem(STORAGE_KEY);
     if (!dataTersimpan) return [];
     return JSON.parse(dataTersimpan).map(
-      (mataKuliah) => new MataKuliah(mataKuliah.id, mataKuliah.nama, mataKuliah.sks, mataKuliah.nilai),
+      (mataKuliah) => new MataKuliah(mataKuliah.id, mataKuliah.kode || "", mataKuliah.nama, mataKuliah.sks, mataKuliah.nilai),
     );
   } catch {
     return [];
@@ -30,16 +30,16 @@ export default function App() {
   }
 
   // CREATE + UPDATE
-  function handleSubmit({ nama, sks, nilai }) {
+  function handleSubmit({ kode, nama, sks, nilai }) {
     if (dataEdit) {
       saveData(
         daftarMataKuliah.map((mataKuliah) =>
-          mataKuliah.id === dataEdit.id ? new MataKuliah(mataKuliah.id, nama, sks, nilai) : mataKuliah,
+          mataKuliah.id === dataEdit.id ? new MataKuliah(mataKuliah.id, kode, nama, sks, nilai) : mataKuliah,
         ),
       );
       setDataEdit(null);
     } else {
-      saveData([...daftarMataKuliah, new MataKuliah(nextId++, nama, sks, nilai)]);
+      saveData([...daftarMataKuliah, new MataKuliah(nextId++, kode, nama, sks, nilai)]);
     }
   }
 

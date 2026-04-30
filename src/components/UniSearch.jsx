@@ -21,9 +21,15 @@ export default function UniSearch() {
       const responseAPI = await fetch(
         "http://universities.hipolabs.com/search?country=Indonesia",
       );
-      if (!responseAPI.ok) throw new Error("Response gagal: " + responseAPI.status);
+      if (!responseAPI.ok)
+        throw new Error("Response gagal: " + responseAPI.status);
       const dataJson = await responseAPI.json();
-      setSemuaUniversitas(dataJson.map((universitas) => ({ name: universitas.name, web: universitas.web_pages?.[0] || "" })));
+      setSemuaUniversitas(
+        dataJson.map((universitas) => ({
+          name: universitas.name,
+          web: universitas.web_pages?.[0] || "",
+        })),
+      );
     } catch {
       setError("Gagal memuat data. Periksa koneksi internet.");
     } finally {
@@ -32,7 +38,9 @@ export default function UniSearch() {
   }
 
   const universitasTersaring = semuaUniversitas
-    .filter((universitas) => universitas.name.toLowerCase().includes(query.toLowerCase()))
+    .filter((universitas) =>
+      universitas.name.toLowerCase().includes(query.toLowerCase()),
+    )
     .slice(0, 6);
 
   return (
